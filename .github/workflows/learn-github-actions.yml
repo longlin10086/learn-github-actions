@@ -23,13 +23,12 @@ jobs:
           ref: 'main'
           path: "."
           ext: ".pdf"
-  Test:
+  test:
     needs: list-files
-    strategy:
-      matrix:
-        paths: ${{ fromJson(needs.list-files.outputs.paths) }}
     runs-on: ubuntu-latest
     steps:
-      - name: Output results
+      - name: Save Paths to File
         run: |
-          echo ${{ matrix.paths }}
+          echo "${{ needs.list-files.outputs.paths }}" > output.txt
+      - name: Output File Content
+        run: cat output.txt
