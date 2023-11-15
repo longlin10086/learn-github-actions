@@ -1,9 +1,13 @@
-name: List Files from AnotherRepo
+name: Test
 
 on:
   push:
+    tags-ignore:
+      - '*'
     branches:
-      - 'main'
+      - 'master'
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   list-files:
@@ -15,12 +19,11 @@ jobs:
         id: list-files
         uses: mirko-felice/list-files-action@v3.0.5
         with:
-          repo: HITSZ-OpenAuto/AUTO3002A # Specify the target repository
-          ref: main # Specify the branch or tag
+          repo: ${{ github.repository }}
+          ref: ${{ github.ref }}
           path: "."
           ext: ".yml"
-
-  test:
+  Test:
     needs: list-files
     strategy:
       matrix:
