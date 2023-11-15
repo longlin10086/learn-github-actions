@@ -19,10 +19,10 @@ jobs:
         id: list-files
         uses: mirko-felice/list-files-action@v3.0.5
         with:
-          repo: ${{ github.repository }}
+          repo: 'HITSZ-OpenAuto/AUTO3002A'
           ref: 'main'
           path: "."
-          ext: ".yml"
+          ext: ".pdf"
   Test:
     needs: list-files
     strategy:
